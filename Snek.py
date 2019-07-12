@@ -1,6 +1,6 @@
 #Snek Object
 
-class Snek
+class Snek:
 
     currentDirection = "up"
     currentLocation = (50,0)

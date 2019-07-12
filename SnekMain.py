@@ -1,9 +1,10 @@
 #Amina Shikhalieva
 #Snek is my rendition of the classic game of snake, where a snake eats and
-#it grows but cannot run into itself
+#grows but cannot run into itself
 
 from tkinter import *
 from tkinter import ttk
+from Snek import Snek
 
 
 class SnekMain:
