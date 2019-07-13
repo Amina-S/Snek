@@ -4,12 +4,12 @@ class Snek:
 
     currentDirection = "up"
     currentLocation = (50,0)
-    Queue body = new Queue [(0,0)]  #push and pop off locations occupied by snek
+    #Queue body = new Queue [(0,0)]  push and pop off locations occupied by snek
 
-    def getCurrentLocation():{
-        return currentLocation
-        }
-    
+#    def getCurrentLocation():{
+#       return currentLocation
+#      }
+'''    
     def turn (way):{
         switch currentLocation{
             case "w":
@@ -31,7 +31,7 @@ class Snek:
         }
     } 
             
-   
+
     def go ():{
         if () {
             }
@@ -45,5 +45,6 @@ class Snek:
     def eat ():{
         #undraw dot
         #increment body by 1 square
-        } 
+        }
+'''
         
