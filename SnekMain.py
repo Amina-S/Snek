@@ -6,28 +6,19 @@ from tkinter import *
 from tkinter import ttk
 from Snek import Snek
 
-
         
-def newDot():{
-            #generates rand tuple (0-100,0-100) and draws dot there
-            #checks if it's not on snek
-            #updates dotLocation
-            }
-   
-def over ():{
-        #player lost, score, high score
-        #play again?
-        }
 
-class SnekMain:
+class SnekMain ():
     def __init__(self, master):
-     #   self.title("Snek") 
-        self.geometry("500x500")
-        self.text = ttk.Text(master, text = "Snek")
-        self.text.grid(row = 0, column = 3, columnspan = 2)
+       master.title("Snek") 
+       master.geometry("1000x600")
+       
+       master.l1 = ttk.Label(master, text = "Snek", anchor = "center", font = "Calibri")
+       master.l1.pack()
+        
     end = False
     snek = Snek()
-    newDot()
+  #  newDot()
     '''
     while (not end):
         wait(5)
@@ -38,10 +29,22 @@ class SnekMain:
         #read from keyboard
         snek.turn()
         '''
+    def newDot():
+            #generates rand tuple (0-100,0-100) and draws dot there
+            #checks if it's not on snek
+            #updates dotLocation
+          x = 2  
+   
+    def over ():
+        #player lost, score, high score
+        #play again?
+        x=3
+
         
 def main():
     root = Tk()
-    game =  SnekMain(root)s
-    root.mainloop()
 
+    game =  SnekMain(root)
+    root.mainloop()
+    
 if __name__ == "__main__": main()
