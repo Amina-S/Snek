@@ -13,7 +13,13 @@ class SnekMain ():
        master.title("Snek") 
        master.geometry("1000x600")
        
-       master.l1 = ttk.Label(master, text = "Snek", anchor = "center", font = "Calibri")
+       master.l1 = ttk.Label(master, text = "Snek", font = ('Courier', 18, 'bold'),
+                             justify = CENTER, foreground = 'dark green')
+       pic = PhotoImage(file = 'C:\\Users\\Home\\Desktop\\SnekPic-2.gif') #remember to include this into project files
+
+       master.l1.config (image = pic)
+       master.l1.image = pic
+       master.l1.config (compound = "bottom")
        master.l1.pack()
         
     end = False
