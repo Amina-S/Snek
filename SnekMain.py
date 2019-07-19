@@ -9,18 +9,31 @@ from Snek import Snek
         
 
 class SnekMain ():
-    def __init__(self, master):
-       master.title("Snek") 
-       master.geometry("1000x600")
+    def __init__(self, mas):
+       mas.title("Snek") 
+       mas.geometry("500x400")
        
-       master.l1 = ttk.Label(master, text = "Snek", font = ('Courier', 18, 'bold'),
+       mas.l1 = ttk.Label(mas, text = "Snek", font = ('Courier', 28, 'bold'),
                              justify = CENTER, foreground = 'dark green')
-       pic = PhotoImage(file = 'C:\\Users\\Home\\Desktop\\SnekPic-2.gif') #remember to include this into project files
+       pic = PhotoImage(file = 'C:\\Users\\Home\\Cornell\\CS\\Projects\\Snek\\SnekPic-2.gif') #remember to include this into project files
 
-       master.l1.config (image = pic)
-       master.l1.image = pic
-       master.l1.config (compound = "bottom")
-       master.l1.pack()
+       
+       mas.l1.config (image = pic)
+       mas.l1.image = pic
+       mas.l1.config (compound = "bottom")
+       mas.l1.pack()
+
+       fra1 = ttk.Frame(mas)
+       fra1.config(relief = RIDGE, padding = (9,9))
+       fra1.pack()
+       mas.b1 = ttk.Button (fra1, text = "Begin",padding = (5,5))
+       mas.b2 = ttk.Button (fra1, text = 'Instructions',padding = (5,5))
+       mas.b3 = ttk.Button (fra1, text = 'Quit',padding = (5,5))
+       mas.b1.grid()
+       #mas.b2.grid()
+       #mas.b3.grid()
+    
+                            
         
     end = False
     snek = Snek()
