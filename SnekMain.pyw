@@ -5,8 +5,7 @@
 from tkinter import *
 from tkinter import ttk
 from Snek import Snek
-
-       
+  
 def quitGame():
     exit()
 
@@ -16,24 +15,29 @@ def launchGame():
     root.state('withdrawn')
     window.lift()
     snek = Snek(window)
+    #maybe include a count
+    #down sequence here
 
-    
+    end = False;
+    while (not end):
+        end = snek.attemptMove()
+        window.update()
+        window.after(300)
 
 def instructions():
     window = Toplevel (root)
     window.title('Instructions')
     window.lift()
+    #don't forget to actually write instructions
     
-           
-     
 root = Tk()
 root.title("Snek") 
 root.geometry("500x400")
 #root.resizeable(False, False)
 root.l1 = ttk.Label(root, text = "Snek", font = ('Courier', 28, 'bold'),
                      justify = CENTER, foreground = 'dark green')
-pic = PhotoImage(file = 'C:\\Users\\Home\\Cornell\\CS\\Projects\\Snek\\SnekPic-2.gif') 
-
+pic = PhotoImage(file =
+                 'C:\\Users\\Home\\Cornell\\CS\\Projects\\Snek\\SnekPic-2.gif') 
 
 root.l1.config (image = pic)
 root.l1.image = pic
@@ -54,11 +58,6 @@ root.b1.grid()
 root.b2.grid()
 root.b3.grid()
 
-                    
-
-end = False
-
-
 def newDot():
         #generates rand tuple (0-100,0-100) and draws dot there
         #checks if it's not on snek
@@ -67,11 +66,8 @@ def newDot():
 
 def over ():
     #player lost, score, high score
-    #play again?
+    #play again? if not, quit()
     x=3
 
-
-
 root.mainloop()
-    
 if __name__ == "__main__": main()
