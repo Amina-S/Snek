@@ -15,14 +15,16 @@ def launchGame():
     root.state('withdrawn')
     window.lift()
     snek = Snek(window)
-    #maybe include a count
-    #down sequence here
-
-    end = False;
-    while (not end):
-        end = snek.attemptMove()
-        window.update()
-        window.after(300)
+    #maybe include a countdown sequence here
+    #also could listen for esc key to pause game, quit, or restart
+    #maybe speed options as well
+    #optional dark mode?
+    
+##    end = False;
+##    while (not end):
+##        end = snek.attemptMove()
+##        window.update()
+##        window.after(300)
 
 def instructions():
     window = Toplevel (root)
@@ -59,7 +61,7 @@ root.b2.grid()
 root.b3.grid()
 
 def newDot():
-        #generates rand tuple (0-100,0-100) and draws dot there
+        #generates rand tuple and draws dot there
         #checks if it's not on snek
         #updates dotLocation
       x = 2  

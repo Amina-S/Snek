@@ -1,16 +1,29 @@
 from tkinter import *
 from tkinter import ttk
 
+class segment():
+    def __init__(self, can, x, y, dist, nextNode = None):
+        self.x = x
+        self.y = y
+        self.dist = dist
+        self.can = can
+        self.nextNode = nextNode
+        square = can.create_rectangle(x-dist, y-dist, x+dist, y+dist)
+        can.itemconfigure(square, fill = 'dark green')
+        
 class Snek ():
     x = 320
     y = 420
-    
+    segSize = 16
     def __init__(self, master):
         currentDirection = "up"
         canvas = Canvas(master)
         canvas.pack()
         canvas.config(width = 640, height = 480)
-        snek = canvas.create_line(self.x, self.y, self.x, self.y+60, fill = 'green', width = 16)
+        seg1 = segment(canvas, Snek.x, Snek.y, Snek.segSize/2)
+        seg2 = segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2)
+        seg3 = segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2)
+         
 
 #    def getCurrentLocation():
 #       return currentLocation
@@ -35,12 +48,12 @@ class Snek ():
 ##                break
 ##        }
             
-
+    
     def attemptMove (self):
         #create new node in current direction
             #if this is a duplicate of another list element, return false
         #remove last node
-        if (self.x<8 or self.x>320-8 or self.y<0 or self.y>420):
+        if (self.x<segDist or self.x>320-segDist or self.y<segDist or self.y>420-segDist):
             return False
 
         #draw new nodes
