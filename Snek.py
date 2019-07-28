@@ -1,11 +1,23 @@
 #Snek Object
+from tkinter import *
+from tkinter import ttk
 
-class Snek:
+class Snek ():
+    def __init__(self, master):
+        currentDirection = "up"
+        x = 320
+        y = 440
+        canvas = Canvas(master)
+        canvas.pack()
+        print('created master')
 
-    currentDirection = "up"
-    currentLocation = (50,0)
-    #Queue body = new Queue [(0,0)]  push and pop off locations occupied by snek
+        canvas.config(width = 640, height = 480)
+        snek = canvas.create_line(x, y, x, y+30, fill = 'green', width = 15)
+        print ('created snek')
+    
+    
 
+        
 #    def getCurrentLocation():{
 #       return currentLocation
 #      }

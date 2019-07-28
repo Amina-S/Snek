@@ -15,10 +15,15 @@ def launchGame():
     window.title('Snek')
     root.state('withdrawn')
     window.lift()
+    snek = Snek(window)
+
     
 
 def instructions():
-    x = 9
+    window = Toplevel (root)
+    window.title('Instructions')
+    window.lift()
+    
            
      
 root = Tk()
@@ -52,7 +57,7 @@ root.b3.grid()
                     
 
 end = False
-snek = Snek()
+
 
 def newDot():
         #generates rand tuple (0-100,0-100) and draws dot there
