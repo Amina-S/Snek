@@ -20,11 +20,11 @@ def launchGame():
     #maybe speed options as well
     #optional dark mode?
     
-##    end = False;
-##    while (not end):
-##        end = snek.attemptMove()
-##        window.update()
-##        window.after(300)
+    end = False;
+    while (not end):
+        end = snek.attemptMove()
+        window.update()
+        window.after(300)
 
 def instructions():
     window = Toplevel (root)
