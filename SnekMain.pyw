@@ -14,17 +14,21 @@ def launchGame():
     window.title('Snek')
     root.state('withdrawn')
     window.lift()
-    snek = Snek(window)
+    canvas = Canvas(window)
+    canvas.pack()
+    snek = Snek(canvas)
     #maybe include a countdown sequence here
     #also could listen for esc key to pause game, quit, or restart
     #maybe speed options as well
     #optional dark mode?
     
-    end = False;
-    while (not end):
-        end = snek.attemptMove()
+    cont = True;
+    while (cont):
+        cont = snek.attemptMove()
+        print ('value of last attemptMove was', cont, '\n')
         window.update()
         window.after(300)
+    print("out of while loop", '\n')
 
 def instructions():
     window = Toplevel (root)
