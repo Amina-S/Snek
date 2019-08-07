@@ -19,20 +19,17 @@ class Snek ():
     x = 320
     y = 420
     segSize = 16
-    length = 3
     direction = "up"
     segSet = {(x, y)}
     def __init__(self, canvas):
         Snek.canvas = canvas
         canvas.config(width = 640, height = 480)
-        Snek.head = segment(canvas, Snek.x, Snek.y, Snek.segSize/2)                                 
-        Snek.tail = segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2,
-                            segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2, Snek.head))
+        Snek.head = segment(canvas, Snek.x, Snek.y, Snek.segSize/2)
+        seg2 = segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2, Snek.head)
+        Snek.tail = segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2, seg2)
         Snek.segSet.add((Snek.x, Snek.y))
         Snek.segSet.add((Snek.x, Snek.y+2*Snek.segSize))
-        Snek.segSet.add((Snek.x, Snek.y+Snek.segSize))
-        #Snek.y = Snek.y-2*Snek.segSize
-            
+        Snek.segSet.add((Snek.x, Snek.y+Snek.segSize))            
         
 ##        seg2 = segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2)
 ##        Snek.tail = segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2)     
@@ -63,24 +60,18 @@ class Snek ():
         elif (Snek.direction == 'left'):
             Snek.x -= Snek.segSize
         else:
-            Snek.x += Snek.segSize
-            
-        print ('in attemptmove(), new x is ', Snek.x, 'new y is ', Snek.y, '\n')                     #complicated bc centers of segnemts don't perfectly overlap
-        print('segSet:')
-        for i in Snek.segSet:
-            print(i)
-            
+            Snek.x += Snek.segSize            
         if (Snek.x<Snek.segSize or Snek.x>640-Snek.segSize or Snek.y<Snek.segSize or Snek.y>480-Snek.segSize):
-            print('returning false bc boundary check')
             return False
         if ((Snek.x, Snek.y) in Snek.segSet):
-            print('returning false because x,y in segSet')
             return False
         Snek.segSet.add((Snek.x, Snek.y))              
         new = segment(Snek.canvas, Snek.x, Snek.y, Snek.segSize/2)
+        Snek.head.setPrev(new)
+        Snek.head = new
         Snek.tail.deleteSeg(Snek.canvas)
         Snek.segSet.discard((Snek.x, Snek.y))    
-        Snek.tail = new
+        Snek.tail = Snek.tail.prev
         return True
         
 ##    def eat ():
