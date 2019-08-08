@@ -19,7 +19,7 @@ class Snek ():
     x = 320
     y = 420
     segSize = 16
-    direction = "up"
+    direction = "Up"
     segSet = {(x, y)}
     def __init__(self, canvas):
         Snek.canvas = canvas
@@ -30,34 +30,21 @@ class Snek ():
         Snek.segSet.add((Snek.x, Snek.y))
         Snek.segSet.add((Snek.x, Snek.y+2*Snek.segSize))
         Snek.segSet.add((Snek.x, Snek.y+Snek.segSize))            
+          
+    def turn (self, way):
+        if (way == 'Up' or way == 'Down'):
+            if (Snek.direction == 'Left' or Snek.direction == 'Right'):
+                Snek.direction = way
+        if (way == 'Left' or way == 'Right'):
+            if (Snek.direction == 'Up' or Snek.direction == 'Down'):
+                Snek.direction = way        
         
-##        seg2 = segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2)
-##        Snek.tail = segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2)     
-##    def turn (way):
-##        switch currentLocation{
-##            case "w":
-##                if (curentDirection.equals("left")||currentDirection.equals("right")):
-##                    currentDirection = "up"
-##                break
-##            case "s":
-##                if (curentDirection.equals("left")||currentDirection.equals("right")):
-##                    currentDirection = "down"
-##                break
-##            case "a":
-##                if (curentDirection.equals("up")||currentDirection.eq("down")):
-##                    currentDirection = "left"
-##                break
-##            case "d":
-##                if (curentDirection.equals("up")|| currentDirection.equals("down")):
-##                    currentDirection = "right"
-##                break
-##        }          
     def attemptMove (self):
-        if (Snek.direction == 'up'):
+        if (Snek.direction == 'Up'):
             Snek.y -= Snek.segSize     
-        elif (Snek.direction == 'down'):
+        elif (Snek.direction == 'Down'):
             Snek.y += Snek.segSize
-        elif (Snek.direction == 'left'):
+        elif (Snek.direction == 'Left'):
             Snek.x -= Snek.segSize
         else:
             Snek.x += Snek.segSize            

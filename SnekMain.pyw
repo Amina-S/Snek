@@ -9,6 +9,7 @@ from Snek import Snek
 def quitGame():
     exit()
 
+    
 def launchGame():
     window = Toplevel (root)
     window.title('Snek')
@@ -21,14 +22,23 @@ def launchGame():
     #also could listen for esc key to pause game, quit, or restart
     #maybe speed options as well
     #optional dark mode?
-    
+
+    def key(event):
+        sym = event.keysym
+        if (sym == 'Up' or sym == 'Down' or sym == 'Left' or sym == 'Right'):
+            snek.turn(sym)
+        elif (sym == 'Escape'):
+            #need pause option
+            quitGame()
+            
     cont = True;
     while (cont):
         cont = snek.attemptMove()
-        print ('value of last attemptMove was', cont, '\n')
         window.update()
-        window.after(300)
-    print("out of while loop", '\n')
+        window.after(200)
+        window.bind('<KeyPress>', key)
+
+     
 
 def instructions():
     window = Toplevel (root)
@@ -39,7 +49,6 @@ def instructions():
 root = Tk()
 root.title("Snek") 
 root.geometry("500x400")
-#root.resizeable(False, False)
 root.l1 = ttk.Label(root, text = "Snek", font = ('Courier', 28, 'bold'),
                      justify = CENTER, foreground = 'dark green')
 pic = PhotoImage(file =
