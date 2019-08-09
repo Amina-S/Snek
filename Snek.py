@@ -1,7 +1,19 @@
 from tkinter import *
 from tkinter import ttk
+from random import randrange
 
-class segment():
+class Dot():
+    def __init__(self, can, x, y):
+        self.x = x
+        self.y = y
+        x1, x2 = x-2, x+2
+        y1, y2 = y-2, y+2
+        self. point = can.create_oval(x1, y1, x2, y2, fill = 'blue')
+    def eatDot (self, can):
+        can.delete(self.point)
+    
+    
+class Segment():
     def __init__(self, can, x, y, dist, prev = None):
         self.x = x
         self.y = y
@@ -17,19 +29,29 @@ class segment():
    
 class Snek ():
     x = 320
-    y = 420
+    y = 400
     segSize = 16
     direction = "Up"
     segSet = {(x, y)}
+
+    def newDot():
+        dotx= randrange(Snek.segSize, 640 - Snek.segSize + 1, Snek.segSize)
+        doty = randrange(Snek.segSize, 480 - Snek.segSize + 1, Snek.segSize)
+        while ((dotx, doty) in Snek.segSet):
+            dotx = randrange(Snek.segSize, 640 - Snek.segSize + 1, Snek.segSize)
+            doty = randrange(Snek.segSize, 480 - Snek.segSize + 1, Snek.segSize)
+        return (dotx, doty)
+    
     def __init__(self, canvas):
         Snek.canvas = canvas
         canvas.config(width = 640, height = 480)
-        Snek.head = segment(canvas, Snek.x, Snek.y, Snek.segSize/2)
-        seg2 = segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2, Snek.head)
-        Snek.tail = segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2, seg2)
+        Snek.head = Segment(canvas, Snek.x, Snek.y, Snek.segSize/2)
+        seg2 = Segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2, Snek.head)
+        Snek.tail = Segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2, seg2)
         Snek.segSet.add((Snek.x, Snek.y))
         Snek.segSet.add((Snek.x, Snek.y+2*Snek.segSize))
-        Snek.segSet.add((Snek.x, Snek.y+Snek.segSize))            
+        Snek.segSet.add((Snek.x, Snek.y+Snek.segSize))
+        Snek.currentDot = Dot(canvas, *Snek.newDot())
           
     def turn (self, way):
         if (way == 'Up' or way == 'Down'):
@@ -49,20 +71,27 @@ class Snek ():
         else:
             Snek.x += Snek.segSize            
         if (Snek.x<Snek.segSize or Snek.x>640-Snek.segSize or Snek.y<Snek.segSize or Snek.y>480-Snek.segSize):
+            print('stopped because bouds error, x: ',x,' y: ',y)
             return False
         if ((Snek.x, Snek.y) in Snek.segSet):
+            print('stopped because new seg in segSet')
             return False
         Snek.segSet.add((Snek.x, Snek.y))              
-        new = segment(Snek.canvas, Snek.x, Snek.y, Snek.segSize/2)
+        new = Segment(Snek.canvas, Snek.x, Snek.y, Snek.segSize/2)
         Snek.head.setPrev(new)
         Snek.head = new
-        Snek.tail.deleteSeg(Snek.canvas)
-        Snek.segSet.discard((Snek.x, Snek.y))    
-        Snek.tail = Snek.tail.prev
+        if ((Snek.x, Snek.y) != (Snek.currentDot.x, Snek.currentDot.y)):
+            Snek.tail.deleteSeg(Snek.canvas)
+            Snek.segSet.discard((Snek.x, Snek.y))    
+            Snek.tail = Snek.tail.prev
+        else:
+            Dot.eatDot(Snek.currentDot, Snek.canvas)
+            Snek.currentDot = Dot(Snek.canvas, *Snek.newDot())
         return True
-        
-##    def eat ():
-##        #undraw dot
+
+    
+      
+
 
 
 

@@ -35,10 +35,10 @@ def launchGame():
     while (cont):
         cont = snek.attemptMove()
         window.update()
-        window.after(200)
+        window.after(150)
         window.bind('<KeyPress>', key)
+        Snek.newDot()
 
-     
 
 def instructions():
     window = Toplevel (root)
@@ -73,11 +73,7 @@ root.b1.grid()
 root.b2.grid()
 root.b3.grid()
 
-def newDot():
-        #generates rand tuple and draws dot there
-        #checks if it's not on snek
-        #updates dotLocation
-      x = 2  
+
 
 def over ():
     #player lost, score, high score
