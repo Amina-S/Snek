@@ -32,12 +32,12 @@ class Snek ():
     y = 400
     segSize = 16
     direction = "Up"
-    segSet = {(x, y)}
+    segSet = set([]) 
 
     def newDot():
         dotx= randrange(Snek.segSize, 640 - Snek.segSize + 1, Snek.segSize)
         doty = randrange(Snek.segSize, 480 - Snek.segSize + 1, Snek.segSize)
-        while ((dotx, doty) in Snek.segSet):
+        while ((dotx, doty) in Snek.segSet): 
             dotx = randrange(Snek.segSize, 640 - Snek.segSize + 1, Snek.segSize)
             doty = randrange(Snek.segSize, 480 - Snek.segSize + 1, Snek.segSize)
         return (dotx, doty)
@@ -48,9 +48,6 @@ class Snek ():
         Snek.head = Segment(canvas, Snek.x, Snek.y, Snek.segSize/2)
         seg2 = Segment(canvas, Snek.x, Snek.y+Snek.segSize, Snek.segSize/2, Snek.head)
         Snek.tail = Segment(canvas, Snek.x, Snek.y+2*Snek.segSize, Snek.segSize/2, seg2)
-        Snek.segSet.add((Snek.x, Snek.y))
-        Snek.segSet.add((Snek.x, Snek.y+2*Snek.segSize))
-        Snek.segSet.add((Snek.x, Snek.y+Snek.segSize))
         Snek.currentDot = Dot(canvas, *Snek.newDot())
           
     def turn (self, way):
@@ -71,18 +68,22 @@ class Snek ():
         else:
             Snek.x += Snek.segSize            
         if (Snek.x<Snek.segSize or Snek.x>640-Snek.segSize or Snek.y<Snek.segSize or Snek.y>480-Snek.segSize):
-            print('stopped because bouds error, x: ',x,' y: ',y)
-            return False
-        if ((Snek.x, Snek.y) in Snek.segSet):
+            print('stopped because bouds error, x: ',Snek.x,' y: ',Snek.y)
+            return False            
+        if ((Snek.x, Snek.y) in Snek.segSet): 
             print('stopped because new seg in segSet')
+            print ('segSet:')
+            for i in Snek.segSet:
+                print (i)
+            print ('x: ',Snek.x,' y: ',Snek.y)
             return False
-        Snek.segSet.add((Snek.x, Snek.y))              
+        Snek.segSet.add((Snek.x, Snek.y))
         new = Segment(Snek.canvas, Snek.x, Snek.y, Snek.segSize/2)
         Snek.head.setPrev(new)
         Snek.head = new
         if ((Snek.x, Snek.y) != (Snek.currentDot.x, Snek.currentDot.y)):
             Snek.tail.deleteSeg(Snek.canvas)
-            Snek.segSet.discard((Snek.x, Snek.y))    
+            Snek.segSet.discard((Snek.tail.x, Snek.tail.y)) 
             Snek.tail = Snek.tail.prev
         else:
             Dot.eatDot(Snek.currentDot, Snek.canvas)

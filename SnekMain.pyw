@@ -5,11 +5,16 @@
 from tkinter import *
 from tkinter import ttk
 from Snek import Snek
+
+import ctypes
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(True)
+except:
+    pass
   
 def quitGame():
     exit()
 
-    
 def launchGame():
     window = Toplevel (root)
     window.title('Snek')
@@ -30,7 +35,7 @@ def launchGame():
         elif (sym == 'Escape'):
             #need pause option
             quitGame()
-            
+
     cont = True;
     while (cont):
         cont = snek.attemptMove()
@@ -38,7 +43,6 @@ def launchGame():
         window.after(150)
         window.bind('<KeyPress>', key)
         Snek.newDot()
-
 
 def instructions():
     window = Toplevel (root)
@@ -52,8 +56,7 @@ root.geometry("500x400")
 root.l1 = ttk.Label(root, text = "Snek", font = ('Courier', 28, 'bold'),
                      justify = CENTER, foreground = 'dark green')
 pic = PhotoImage(file =
-                 'C:\\Users\\Home\\Cornell\\CS\\Projects\\Snek\\SnekPic-2.gif') 
-
+                 'C:\\Users\\amshi\\Cornell\\CS\\Projects\\Snek\\SnekPic-2.gif') 
 root.l1.config (image = pic)
 root.l1.image = pic
 root.l1.config (compound = "bottom")
@@ -68,12 +71,9 @@ root.b2 = ttk.Button (fra1, text = 'Instructions',padding = (5,5))
 root.b2.config(command = instructions)
 root.b3 = ttk.Button (fra1, text = 'Quit',padding = (5,5))
 root.b3.config(command = quitGame)
-
 root.b1.grid()
 root.b2.grid()
 root.b3.grid()
-
-
 
 def over ():
     #player lost, score, high score
