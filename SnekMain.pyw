@@ -48,7 +48,19 @@ def instructions():
     window = Toplevel (root)
     window.title('Instructions')
     window.lift()
-    #don't forget to actually write instructions
+    window.l2 = ttk.Label(window, font = ('Courier', 14), justify = CENTER,
+                          foreground = 'dark green')
+    window.l2.config(text = 'Use arrow keys to steer Snek to the dot.')
+    window.l3 = ttk.Label(window, font = ('Courier', 14), justify = CENTER,
+                          foreground = 'dark green')
+    window.l3.config(text = 'Don\'t let him hit a wall or himself!')
+    window.l4 = ttk.Label(window, font = ('Courier', 14), justify = CENTER,
+                          foreground = 'dark green')
+    window.l4.config(text = 'Press escape key to pause')
+    window.l2.pack()
+    window.l3.pack()
+    window.l4.pack()
+
     
 root = Tk()
 root.title("Snek") 
